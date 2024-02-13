@@ -6,7 +6,16 @@
 */
 
 function countVowels(str) {
-    // Your code here
+    
+    vowels = new Set(['a','e','i','o','u','A','E','I','O','U'])
+    ans = 0
+    for (let i of str){
+        if (vowels.has(i)){
+            ans += 1
+        }
+    }
+    return ans
 }
 
+console.log(countVowels('the quick brown fox'))
 module.exports = countVowels;

@@ -39,11 +39,97 @@
 
   Testing the server - run `npm run test-todoServer` command in terminal
  */
-  const express = require('express');
-  const bodyParser = require('body-parser');
-  
-  const app = express();
-  
-  app.use(bodyParser.json());
-  
-  module.exports = app;
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const port = 3000;
+const app = express();
+let todos = [];
+let ctr = 1;
+
+app.use(bodyParser.json());
+
+app.get("/todos", (req, res) => {
+    console.log("here");
+    res.status(200).send(todos);
+});
+
+app.get("/todos/:id", (req, res) => {
+    todo = todos.filter((elem) => {
+        return elem.id == req.params.id;
+    });
+
+    if (todo.length) {
+        res.status(200).send(todo[0]);
+    } else {
+        res.status(404).send("Not Found!");
+    }
+});
+
+app.post("/todos", (req, res) => {
+    id = _getUniqueId();
+    todo = {
+        id: id,
+        completed: false,
+        title: req.body.title,
+        description: req.body.description,
+    };
+    todos.push(todo);
+    res.status(201).send(todo);
+});
+
+app.put("/todos/:id", (req, res) => {
+    
+    todoIdx = todos.findIndex((elem) => {
+        return elem.id == req.params.id;
+    });
+
+    if (todoIdx > -1) {
+        todos[todoIdx].completed = req.body.completed;
+        todos[todoIdx].title = req.body.title || todos[todoIdx].title;
+        res.status(200).send('Updated');
+    } else {
+        res.status(404).send("Not Found!");
+    }
+});
+
+app.delete("/todos/:id", (req, res) => {
+    todoIdx = todos.findIndex((elem) => {
+        return elem.id == req.params.id;
+    });
+
+    if (todoIdx > -1) {
+        todos.splice(todoIdx, 1);
+        res.status(200).send('deleted');
+    } else {
+        res.status(404).send("Not Found!");
+    }
+});
+
+app.get("*", (req, res) => {
+    res.status(404).send("Page not found");
+});
+
+app.listen(port, () => {
+    console.log(`server started at ${port}`);
+});
+
+function _getUniqueId() {
+    ctr += 1;
+    return ctr;
+    multiplier = 100;
+    prefix = new Date().getTime() % multiplier;
+    suffix = Math.round(Math.random() * 10000);
+    root = "";
+
+    corpus =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*(){}[];:/?><.,-=_+";
+
+    for (let i = 0; i < 10; i += 1) {
+        rand = Math.round(Math.random() * 1000) % corpus.length;
+        root += corpus[rand];
+    }
+    return prefix + root + suffix;
+}
+
+module.exports = app;

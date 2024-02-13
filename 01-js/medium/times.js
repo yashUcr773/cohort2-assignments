@@ -9,5 +9,19 @@ There is no automated test for this one, this is more for you to understand time
 */
 
 function calculateTime(n) {
-    return 0.01;
+    t1 = new Date().getTime()
+
+    ans = 0
+    for (let i = 0; i<=n; i += 1){
+        ans += i
+    }
+    t2 = new Date().getTime()
+
+    return (t2 - t1)/1000
+}
+
+times = [10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000, 100000000000]
+for (time of times) {
+    console.log(time.toLocaleString())
+    console.log(calculateTime(time))
 }

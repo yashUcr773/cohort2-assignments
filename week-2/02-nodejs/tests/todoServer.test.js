@@ -48,6 +48,10 @@ describe('Todo API', () => {
         createdTodoId = response.id;
         done();
       });
+      res.on('error', (err)=> {
+        console.log('err')
+        console.log(err)
+      })
     });
 
     req.write(JSON.stringify(todo));

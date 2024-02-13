@@ -14,7 +14,46 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+    temp = {};
+
+    transactions.forEach((transaction) => {
+        if (!temp[transaction.category]) temp[transaction.category] = 0;
+        temp[transaction.category] += transaction.price;
+    });
+
+    ans = [];
+    Object.keys(temp).forEach((key) => {
+        ans.push({ 
+            category: key,
+            totalSpent: temp[key] });
+    });
+
+    return ans;
 }
+
+console.log(calculateTotalSpentByCategory([
+    {
+		id: 1,
+		timestamp: 1656076800000,
+		price: 10,
+		category: 'Food',
+		itemName: 'Pizza',
+	},
+    {
+		id: 1,
+		timestamp: 1656076800000,
+		price: 10,
+		category: 'Food',
+		itemName: 'Pizza',
+	},
+    {
+		id: 1,
+		timestamp: 1656076800000,
+		price: 10,
+		category: 'Food',
+		itemName: 'Pizza',
+	}
+]))
+
 
 module.exports = calculateTotalSpentByCategory;

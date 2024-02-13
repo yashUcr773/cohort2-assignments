@@ -5,6 +5,15 @@
  */
 
 function sleep(milliseconds) {
+    return new Promise(async (resolve, reject) => {
+        t1 = new Date().getTime()
+        while (new Date().getTime() - t1 <= milliseconds){}
+        resolve(true)
+    })
 }
+
+console.log('1')
+sleep(10000)
+console.log('2')
 
 module.exports = sleep;

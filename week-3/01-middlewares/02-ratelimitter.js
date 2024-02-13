@@ -16,6 +16,23 @@ setInterval(() => {
     numberOfRequestsForUser = {};
 }, 1000)
 
+function limiter(req, res, next) {
+    let userId = req.headers['user-id']
+
+    if (!numberOfRequestsForUser[userId]) {
+        numberOfRequestsForUser[userId] = 0
+    }
+
+    numberOfRequestsForUser[userId] += 1
+    if (numberOfRequestsForUser[userId]>=5) {
+        res.status(404).send('Not Found')
+    } else {
+        next()
+    }
+}
+
+app.use(limiter)
+
 app.get('/user', function(req, res) {
   res.status(200).json({ name: 'john' });
 });
@@ -23,5 +40,7 @@ app.get('/user', function(req, res) {
 app.post('/user', function(req, res) {
   res.status(200).json({ msg: 'created dummy user' });
 });
+
+app.listen(3000)
 
 module.exports = app;

@@ -16,6 +16,48 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+    constructor() {
+        this.result = 0;
+    }
+
+    add(num1) {
+        this.result += num1;
+    }
+
+    subtract(num1) {
+        this.result -= num1;
+    }
+
+    multiply(num1) {
+        this.result *= num1;
+    }
+
+    divide(num1) {
+        if (num1 == 0){
+            throw new Error('invlid input')
+        }
+        this.result /= num1;
+    }
+
+    clear() {
+        this.result = 0;
+    }
+
+    getResult() {
+        return this.result;
+    }
+
+    // `10 +   2 *    (   6 - (4 + 1) / 2) + 7`
+    calculate(str) {
+        if (/[A-Z]/gi.test(str)) {
+            throw new Error("Invalid Input");
+        }
+        str = str.replace(/ /g, "");
+        ans = eval(str);
+        console.log (str, ans, typeof(ans))
+        return ans
+    }
+}
 
 module.exports = Calculator;
