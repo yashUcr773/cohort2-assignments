@@ -11,10 +11,14 @@ Actions: Create a new user account. Perform validations and return a success mes
  - POST /users/signin - User login.
 Inputs: email, password
 Actions: Authenticate the user. Return a token (JWT) for authorization in subsequent requests if successful, or an error message if authentication fails.
-Blog Platform Endpoints:
+
+### Blog Platform Endpoints:
 
  - GET /posts - Retrieve all blog posts.
-Actions: Fetch a list of all blog posts. Can be public or user-specific based on authentication.
+Actions: Fetch a list of all blog posts. Can be public.
+
+ - GET /myposts - Retrieve all blog posts.
+Actions: Fetch a list of all blog posts. user-specific based on authentication.
 
  - POST /posts - Create a new blog post.
 Inputs: title, body
@@ -32,3 +36,20 @@ Actions: Delete the specified blog post if the authenticated user is the owner. 
 
 ## Database
 Try using `prisma` as the ORM and Postgres as the provider.
+
+
+
+## Steps
+- Create project 
+    - npm create cloudflare -- -worker-app-1
+    - npm create hono@latest my-app
+- Add prisma
+    - npm install --save-dev prisma
+    - npx prisma init
+    - Add Schema
+    - npx prisma migrate dev --name init
+    - npm install @prisma/extension-accelerate
+    - npx prisma generate --no-engine
+- deploy
+    - npm run deploy
+    - npm run dev
