@@ -4,6 +4,7 @@ compatibility_date = "2023-12-01"
 [vars]
 JWTEXPIRYTIME=604800000
 postgresDBString = 'postgresDBString'
+hidden="hiddenval"
 # API_HOST = "staging.example.com"
 
 # [env.staging.vars]
