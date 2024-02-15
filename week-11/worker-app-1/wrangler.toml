@@ -2,7 +2,8 @@ name = "worker-app-1"
 compatibility_date = "2023-12-01"
 
 [vars]
-# postgresDBString = 'postgresDBString'
+JWTEXPIRYTIME=604800000
+postgresDBString = 'postgresDBString'
 # API_HOST = "staging.example.com"
 
 # [env.staging.vars]

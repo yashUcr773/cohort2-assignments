@@ -46,10 +46,18 @@ const checkAuth = async (c: Context, next: Next) => {
 
 }
 
-app.get('/allposts', async (c) => {
+app.get('/allposts', async (c: Context) => {
 
     try {
         const prisma = await initializePrisma(c)
+        const { hidden } = env<{ hidden: string }>(c)
+        const { hidden_encrypt } = env<{ hidden_encrypt: string }>(c)
+
+        console.log('hidden')
+        console.log(hidden)
+        console.log('hidden_encrypt')
+        console.log(hidden_encrypt)
+
         const posts = await prisma.posts.findMany({
             include: {
                 user: {

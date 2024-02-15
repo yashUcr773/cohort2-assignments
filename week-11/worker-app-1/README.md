@@ -50,6 +50,7 @@ Try using `prisma` as the ORM and Postgres as the provider.
     - npx prisma migrate dev --name init
     - npm install @prisma/extension-accelerate
     - npx prisma generate --no-engine
+- Code
 - deploy
     - npm run deploy
     - npm run dev

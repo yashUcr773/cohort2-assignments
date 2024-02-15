@@ -6,6 +6,7 @@ import { env } from "hono/adapter"
 export default async function initializePrisma(c: Context) {
 
     const { DATABASE_URL } = env<{ DATABASE_URL: string }>(c)
+
     return new PrismaClient({
         datasourceUrl: DATABASE_URL
     }).$extends(withAccelerate())
