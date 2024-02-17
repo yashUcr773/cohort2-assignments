@@ -17,7 +17,7 @@ Actions: Authenticate the user. Return a token (JWT) for authorization in subseq
  - GET /posts - Retrieve all blog posts.
 Actions: Fetch a list of all blog posts. Can be public.
 
- - GET /myposts - Retrieve all blog posts.
+ - GET /posts/myposts - Retrieve all blog posts.
 Actions: Fetch a list of all blog posts. user-specific based on authentication.
 
  - POST /posts - Create a new blog post.

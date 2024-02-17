@@ -10,10 +10,14 @@ Actions: Create a new user account. Perform validations and return a success mes
  - POST /users/signin - User login.
 Inputs: email, password
 Actions: Authenticate the user. Return a token (JWT) for authorization in subsequent requests if successful, or an error message if authentication fails.
-Blog Platform Endpoints:
+
+## Blog Platform Endpoints:
 
  - GET /posts - Retrieve all blog posts.
 Actions: Fetch a list of all blog posts. Can be public or user-specific based on authentication.
+
+ - GET /posts/myposts - Retrieve all blog posts.
+Actions: Fetch a list of all blog posts. user-specific based on authentication.
 
  - POST /posts - Create a new blog post.
 Inputs: title, body, tags (array of string)
@@ -34,3 +38,21 @@ Try using `prisma` as the ORM and Postgres as the provider. You will have to use
 
 ## Assumption
 You can assume that you only support 10 tags that the user can choose from. User doesn't need to have the ability to add more tags (even better if you implement that)
+
+## Steps
+- Create project 
+    - npm create cloudflare -- -worker-app-1 or
+    - npm create hono@latest my-app
+- Add prisma
+    - npm install --save-dev prisma
+    - npx prisma init
+    - Add Schema
+    - Add connection strings
+        - in .env .dev.vars wrangler.toml cloudflare secret using npx wrangler secret put <KEY>
+    - npx prisma migrate dev --name init
+    - npm install @prisma/extension-accelerate
+    - npx prisma generate --no-engine
+- Code
+- deploy
+    - npm run deploy
+    - npm run dev
